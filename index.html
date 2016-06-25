@@ -1,25 +1,36 @@
-<div class="uploadFile">
-  <input type="file" id="files" name="files[]" multiple><br>
-  <output id="list"></output>
-</div>
 
-<script>
-function handleFileSelect(evt) {
-   var files = evt.target.files; // FileList object
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div class="uploadFile">
+    <input type="file" id="files" name="files[]" multiple><br>
+    <output id="list"></output>
+  </div>
 
-   // files is a FileList of File objects. List some properties.
-   var output = [];
-   console.log(files[0])
+  <script>
+  function handleFileSelect(evt) {
+     var files = evt.target.files; // FileList object
 
-   var reader = new FileReader();
+     // files is a FileList of File objects. List some properties.
+     var output = [];
+     console.log(files[0])
 
-   reader.onload = function(event){
-     console.log(event.target.result)
+     var reader = new FileReader();
+
+     reader.onload = function(event){
+       console.log(event.target.result)
+     }
+
+     reader.readAsText(files[0])
+
    }
-   
-   reader.readAsText(files[0])
 
- }
-
- document.getElementById('files').addEventListener('change', handleFileSelect, false);
-</script>
+   document.getElementById('files').addEventListener('change', handleFileSelect, false);
+  </script>
+</body>
+</html>
