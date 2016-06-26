@@ -9,6 +9,43 @@ Array.prototype.move = function (old_index, new_index) {
     return this; // for testing purposes
 };
 
+function saveData(data) {
+    window.localStorage.clear();
+    var jsonString = JSON.stringify(data);
+    console.log(jsonString.length);
+    console.log(jsonString);
+    var index = 1;
+    var blockLength = 10000;
+    while (jsonString.length > 0) {
+        var keyName = "allData" + index;
+
+        if (blockLength > jsonString.length) {
+            window.localStorage.setItem(keyName, jsonString);
+            jsonString = "";
+            continue;
+        }
+
+        window.localStorage.setItem(keyName, jsonString.substring(0, blockLength));
+        jsonString = jsonString.substring(blockLength);
+        index++;
+    }
+}
+
+function readData() {
+    var index = 1;
+
+    var allJson = "";
+
+    var savedBlock = window.localStorage.getItem("allData" + index);
+    while (savedBlock != null && savedBlock != "") {
+        allJson += savedBlock;
+        index++;
+        savedBlock = window.localStorage.getItem("allData" + index);
+    }
+
+    return JSON.parse(allJson);
+}
+
 function queryDataPhonetic(data, query_string) {
     query_string = convertToPhonetic(query_string);
     console.log(query_string);
@@ -18,11 +55,11 @@ function queryDataPhonetic(data, query_string) {
         var row = data[i];
         for (var j=0; j<data[i].length; j++) {
             var cell = row[j];
-            var phonetic = cell.phonetic;
-            if (!matchedWords[cell.original] && phonetic && phonetic.indexOf(query_string) == 0) {
+            var phonetic = cell.p;
+            if (!matchedWords[cell.o] && phonetic && phonetic.indexOf(query_string) == 0) {
                 row.move(j, 0);
                 query_results.push(row);
-                matchedWords[cell.original] = true;
+                matchedWords[cell.o] = true;
             }
         }
     }
@@ -55,9 +92,9 @@ function parseCsvFile(file, callback) {
                    continue;
                }
                dataRow.push({
-                   original: cellValue,
-                   phonetic: convertToPhonetic(cellValue),
-                   columnName: headers[j]
+                   o: cellValue, //Original
+                   p: convertToPhonetic(cellValue), //Phonetic
+                   c: headers[j] //ColumnName
                });
            }
            data.push(dataRow);

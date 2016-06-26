@@ -23,10 +23,12 @@
         </div>
     </div>
 
-    <table id="resultsTable">
-        <tbody id="results">
-        </tbody>
-    </table>
+    <div class="outer">
+        <div class="inner">
+            <table id="results">
+            </table>
+        </div>
+    </div>
 
     <script type="text/javascript">
 
@@ -42,9 +44,11 @@
             //}
         });
 
+        $('#searchButton').click();
+
         function search(query) {
 
-            var data = JSON.parse(window.localStorage.getItem('allData'));
+            var data = readData();
 
             var tbody = $('#results');
             tbody.empty();
@@ -52,7 +56,7 @@
             var results = queryDataPhonetic(data, query);
 
             if (query == "") {
-                tbody.append('<tr><td><h3>Enter a search term.</h3></td></tr>');
+                tbody.append('<tr class="resultsHeader"><th><h3>Enter a search term.</h3></th></tr>');
                 return;
             }
 
@@ -64,7 +68,7 @@
             var columnNames = {};
 
             for (var i = 0; i < results.length; i++) {
-                var column = results[i][0].columnName;
+                var column = results[i][0].c;
 
                 if (!columnNames[column]) {
                     columnNames[column] = [];
@@ -77,21 +81,36 @@
 
             for (var i = 0; i < keys.length; i++) {
                 var key = keys[i];
-                tbody.append('<tr><td><h3>' + key + '</h3></td></tr>');
+                tbody.append('<tr class="resultsHeader"><th><h3>' + key + '</h3></th><td></td></tr>');
 
                 for (var j = 0; j < columnNames[key].length; j++) {
                     var row = columnNames[key][j];
-                    var disp = '<tr>'
+                    var disp = '<tr class="resultsRow">';
                     for (var k = 0; k < row.length; k++) {
-                        disp = disp + '<td>' + row[k].original + '</td>'
+                        if (k == 0) {
+                            disp = disp + '<th class="rowHeader" title="' + row[k].o + '">' + row[k].o + '</th>'
+                        } else {
+                            disp = disp + '<td title="' + row[k].c + '">' + row[k].o + '</td>'
+                        }
+
                     }
-                    disp = disp + '</tr><br>'
+                    disp = disp + '</tr><br>';
                     tbody.append(disp)
                 }
             }
 
         }
-
+        var csvContent = "data:text/csv;charset=utf-8,";
+        for (var i=0; i<data.length; i++) {
+            for (var j=0; j<data[i].length; j++) {
+                csvContent += data[i][j].original + ","
+            }
+            csvContent += "\n"
+        }
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
     </script>
 
 </body>

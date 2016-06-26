@@ -1,8 +1,9 @@
 body{
-    background: lightgrey;
+    background: white;
     font-family: 'Helvetica', 'Arial', sans-serif;
     padding: 0;
     margin: 0;
+
 }
 
 label.selectFile input[type="file"] {
@@ -103,6 +104,7 @@ button:focus {
 #fileList li {
     list-style: none;
 }
+<<<<<<< HEAD
 
 #resultsTable {
     margin-right: 20px;
@@ -111,21 +113,102 @@ button:focus {
 }
 
 .mainBox: hover + .uploadFile{
+=======
+.mainBox:hover + .uploadFile{
+>>>>>>> master
     background: white;
 }
 
-.mainBox: active{
+.mainBox:active{
 
 }
 
-.mainBox: invalid + span{
+.mainBox:invalid + span{
 
 }
 
-.mainBox: valid + span{
+.mainBox:valid + span{
 
 }
 
+<<<<<<< HEAD
 td {
     min-width: 200px;
+=======
+/*#resultsWrapper {
+    width: 100%;
+    overflow-x: scroll;
+    max-width: 100%;
+    margin-top: 10px;
+    padding-bottom: 15px;
+    position: relative;
+}
+
+#resultsTable {
+    margin-right: 20px;
+    margin-left: 20px;
+}*/
+
+/*.resultsHeader {
+    padding: 0;
+    height: 4em;
+}
+
+.resultsHeader th {
+    padding: 0;
+    height: 4em;
+    position: absolute;
+}*/
+
+.resultsHeader {
+    height: 4em;
+}
+
+.resultsHeader h3 {
+    text-align: left;
+}
+
+.rowHeader {
+    border-top: 1px solid lightgray;
+    border-right: 1px solid #f5f5f5;
+    border-bottom: 1px solid lightgray;
+    font-weight: 500;
+    padding-right: 0px;
+    text-align: left;
+    background: white;
+    color: black;
+}
+
+table {
+    width: 100%;
+    *margin-left: -100px;/*ie7*/
+    border-collapse: collapse;
+}
+td, th {
+    vertical-align: top;
+    padding: 15px;
+    width: 400px;
+    white-space: nowrap;
+    font-size: 0.9em;
+}
+th {
+    position:absolute;
+    *position: relative; /*ie7*/
+    left:0;
+    width:200px;
+}
+
+.resultsRow td {
+    border-top: 1px solid lightgray;
+    border-bottom: 1px solid lightgray;
+    background: white;
+    color: #555;
+}
+
+.outer {position:relative}
+.inner {
+    overflow-x:scroll;
+    overflow-y:visible;
+    margin-left:215px;
+>>>>>>> master
 }
