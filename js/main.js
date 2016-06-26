@@ -9,26 +9,6 @@ Array.prototype.move = function (old_index, new_index) {
     return this; // for testing purposes
 };
 
-function processFiles(files) {
-    for (var i = 0; i < files.length; i++) {
-        (function(index) {
-            parseCsvFile(files[index], function(data) {
-                allData = allData.concat(data);
-                if (index == files.length - 1) {
-                    doneProcessing();
-                }
-            });
-        })(i);
-    }
-}
-
-function doneProcessing() {
-    console.log(allData);
-    window.localStorage.setItem("allData", JSON.stringify(allData));
-    var data = queryDataPhonetic(allData, "jiga");
-    console.log(data);
-}
-
 function queryDataPhonetic(data, query_string) {
     query_string = convertToPhonetic(query_string);
     console.log(query_string);

@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <table>
+    <table id="resultsTable">
         <tbody id="results">
         </tbody>
     </table>
@@ -30,6 +30,12 @@
             search(input.value);
         });
 
+        $('#searchInput').on('keyup', function(e) {
+            //if (e.keyCode == 13) {
+                $('#searchButton').click();
+            //}
+        });
+
         function search(query) {
 
             var data = JSON.parse(window.localStorage.getItem('allData'));
@@ -39,9 +45,38 @@
 
             var results = queryDataPhonetic(data, query);
 
+            if (query == "") {
+                tbody.append('<tr><td><h3>Enter a search term.</h3></td></tr>');
+                return;
+            }
+
+            if (results.length == 0) {
+                tbody.append('<tr><td><h3>No results.</h3></td></tr>');
+                return;
+            }
+
+            var columnNames = {};
+
             for (var i = 0; i < results.length; i++) {
-                var row = results[i];
-                tbody.append('<tr><td>' + row[0].columnName + ': ' + row[0].original + '</td></tr>');
+                var column = results[i][0].columnName;
+
+                if (!columnNames[column]) {
+                    columnNames[column] = [];
+                }
+
+                columnNames[column].push(results[i]);
+            }
+
+            var keys = Object.keys(columnNames);
+
+            for (var i = 0; i < keys.length; i++) {
+                var key = keys[i];
+                tbody.append('<tr><td><h3>' + key + '</h3></td></tr>');
+
+                for (var j = 0; j < columnNames[key].length; j++) {
+                    var row = columnNames[key][j];
+                    tbody.append('<tr><td>' + row[0].original + '</td></tr>');
+                }
             }
 
         }

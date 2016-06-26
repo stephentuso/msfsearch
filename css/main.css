@@ -59,23 +59,26 @@ button:focus {
 
 .searchBar {
     padding: 10px;
+    background: #eee;
 }
 
 .searchContainer {
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 20px;
 }
 
 .searchContainer input {
-    font-size: 1.8em;
+    font-size: 1.2em;
     padding: 8px;
     border: 1px solid lightgray;
+    width: 400px;
+    border-radius: 2px;
 }
 
 #searchButton {
-    font-size: 1.8em;
+    font-size: 1.2em;
     background: red;
     border: none;
+    border-radius: 2px;
     padding: 8px;
     color: white;
 }
@@ -114,5 +117,12 @@ img {
 }
 
 .mainBox: valid + span{
+
+}
+
+#resultsTable {
+
+    margin-right: 20px;
+    margin-left: 20px;
 
 }

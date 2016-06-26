@@ -23,7 +23,7 @@
             <div id="mainBox" class="align-center">
                 <label class="btn btn-danger center-block" id="filebutton">
                     Select Files
-                    <input type="file" style="display: none;" id="files" value="Select File">
+                    <input type="file" style="display: none;" id="files" value="Select File" multiple>
                 </label>
             </div>
         </div>
@@ -40,32 +40,39 @@
         var allData = [];
         var file_list = [];
         $('#nextbutton').hide();
-        function handleFileSelect(evt) {
-            var files = evt.target.files; // FileList object
 
-            for (var i = 0; i < files.length; i++) {
-                file_list.push(files[i])
-                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
-                $('#fileList').append(text);
-                text.fadeIn(500);
+        $('#nextbutton').click(function() {
+            for (var i = 0; i < file_list.length; i++) {
+                console.log(file_list[i].name);
                 (function(index) {
-                    parseCsvFile(files[index], function(data) {
-                        console.log(data);
+                    parseCsvFile(file_list[index], function(data) {
                         allData = allData.concat(data);
-
-                        if (index == files.length - 1) {
+                        console.log(allData.length);
+                        if (index == file_list.length - 1) {
                             doneProcessing();
                         }
                     });
                 })(i);
             }
-            $('#nextbutton').fadeIn(500);
-        }
+        });
 
         function doneProcessing() {
-            window.localStorage.setItem("allData", allData);
-            console.log("DONE");
-            processFiles(files);
+            var json = JSON.stringify(allData);
+            console.log(json.length);
+            window.localStorage.setItem("allData", json);
+            window.location.href = "search.html";
+        }
+
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
+
+            for (var i = 0; i < files.length; i++) {
+                file_list.push(files[i]);
+                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
+                $('#fileList').append(text);
+                text.fadeIn(500);
+            }
+            $('#nextbutton').fadeIn(500);
         }
 
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
@@ -82,6 +89,7 @@
                 $('#nextbutton').fadeOut(500);
             }
         }
+
     </script>
 </body>
 </html>
