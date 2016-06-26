@@ -4,33 +4,44 @@
 <head>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/simple-excel.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-  <div class="uploadFile">
+    <div class="uploadFile">
     <input type="file" id="files" name="files[]" multiple><br>
     <output id="list"></output>
-  </div>
+    </div>
 
-  <script>
-  function handleFileSelect(evt) {
-     var files = evt.target.files; // FileList object
+    <script>
+        var data = []
+        function handleFileSelect(evt) {
+            var files = evt.target.files; // FileList object
 
-     // files is a FileList of File objects. List some properties.
-     var output = [];
-     console.log(files[0])
+            // files is a FileList of File objects. List some properties.
+            var output = [];
+            var reader = new FileReader();
+            reader.onload = function(event){
+                console.log(event.target.result)
+            }
+            console.log(files[0])
+            for (var i=0; i<files.length; i++) {
+                var parser;
 
-     var reader = new FileReader();
-
-     reader.onload = function(event){
-       console.log(event.target.result)
-     }
-
-     reader.readAsText(files[0])
-
-   }
-
-   document.getElementById('files').addEventListener('change', handleFileSelect, false);
-  </script>
+                switch (files[i].type) {
+                    case "text/csv":
+                        parser = new SimpleExcel.Parser.CSV()
+                        break;
+                    default:
+                        break;
+                }
+                parser.loadFile(files[0], function(){
+                    data.push(parser.getSheet())
+                    console.log(data)
+                })
+            }
+        }
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+    </script>
 </body>
 </html>
