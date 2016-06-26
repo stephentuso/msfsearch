@@ -1,10 +1,19 @@
 body{
     font-family: 'Helvetica', 'Arial', sans-serif;
+    padding: 0;
+    margin: 0;
 }
 
 label.selectFile input[type="file"] {
     position: fixed;
     top: -1000px;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
 #mainBox{
@@ -46,6 +55,29 @@ label.selectFile input[type="file"] {
     /*background: linear-gradient(#ee0000, #cf0202); /* For Safari 5.1 to 6.0 */
     background-color: transparent;
     border-radius: 5px;
+}
+
+.searchBar {
+    padding: 10px;
+}
+
+.searchContainer {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.searchContainer input {
+    font-size: 1.8em;
+    padding: 8px;
+    border: 1px solid lightgray;
+}
+
+#searchButton {
+    font-size: 1.8em;
+    background: red;
+    border: none;
+    padding: 8px;
+    color: white;
 }
 
 /* hover, active, invalid + span, valid + span */
