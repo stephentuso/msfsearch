@@ -58,9 +58,15 @@ img {
     length: 80%;
     margin-left: auto;
     margin-right: auto;
-    position: fixed; 
+    position: fixed;
 }
-
+#fileList {
+    text-align: center;
+    clear: both;
+}
+#fileList li {
+    list-style: none;
+}
 .mainBox: hover + .uploadFile{
     background: white;
 }

@@ -29,7 +29,9 @@
                 (function(index) {
                     parseCsvFile(files[index], function(data) {
                         console.log(data);
-                        allData.concat(data);
+                        allData = allData.concat(data);
+                        var text = $("<li></li>").text(files[index].name)
+                        $('#fileList').append(text)
                         if (index == files.length - 1) {
                             doneProcessing();
                         }
