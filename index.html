@@ -58,17 +58,23 @@
         var allData = [];
         var file_list = [];
 
-        $('#aboutbutton').click(function(){
+        $('#aboutbutton').click(function() {
             window.location.href = "about.html";
         });
 
         $('#nextbutton').hide();
         $('#nextbutton').click(function() {
+
+            var filesProcessed = 0;
+
             for (var i = 0; i < file_list.length; i++) {
                 (function(index) {
                     parseCsvFile(file_list[index], function(data) {
                         allData = allData.concat(data);
-                        if (index == file_list.length - 1) {
+                        console.log(allData.length);
+                        filesProcessed++;
+                        console.log(filesProcessed);
+                        if (filesProcessed == file_list.length) {
                             doneProcessing();
                         }
                     });
@@ -86,7 +92,7 @@
             for (var i = 0; i < files.length; i++) {
                 file_list.push(files[i]);
                 var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
-                if (!(text in fileList)){
+                if (!(text in fileList)) {
                     $('#fileList').append(text);
                     text.fadeIn(500);
                 }
@@ -97,11 +103,11 @@
         }
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
         function deleteFile(event) {
-            var remove_name = $(event.target).parent().text().trim()
-            $(event.target).parent().fadeOut(500)
+            var remove_name = $(event.target).parent().text().trim();
+            $(event.target).parent().fadeOut(500);
             for (var i=0; i<file_list.length; i ++) {
                 if (file_list[i].name == remove_name) {
-                    file_list.splice(i, 1)
+                    file_list.splice(i, 1);
                     break
                 }
             }
