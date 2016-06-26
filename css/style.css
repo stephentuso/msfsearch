@@ -1,5 +1,5 @@
 body{
-    background: black;
+    background: radial-gradient(white, lightgrey);
 }
 
 #topheader{
@@ -9,7 +9,8 @@ body{
     width: 50%;
 }
 #filebutton{
-    margin: 0 20%;
+    margin: 0 auto;
+    width: 30%;
     min-height: 50px;
     padding-top: 9px;
     font-size: 1.5em;
