@@ -42,6 +42,8 @@
             //}
         });
 
+        $('#searchButton').click();
+
         function search(query) {
 
             var data = JSON.parse(window.localStorage.getItem('allData'));
@@ -52,7 +54,7 @@
             var results = queryDataPhonetic(data, query);
 
             if (query == "") {
-                tbody.append('<tr><td><h3>Enter a search term.</h3></td></tr>');
+                tbody.append('<tr class="resultsHeader"><th><h3>Enter a search term.</h3></th></tr>');
                 return;
             }
 
@@ -86,7 +88,7 @@
                         if (k == 0) {
                             disp = disp + '<th class="rowHeader" title="' + row[k].original + '">' + row[k].original + '</th>'
                         } else {
-                            disp = disp + '<td>' + row[k].original + '</td>'
+                            disp = disp + '<td title="' + row[k].columnName + '">' + row[k].original + '</td>'
                         }
 
                     }
