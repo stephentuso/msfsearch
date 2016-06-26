@@ -32,12 +32,6 @@
 
         <div class="row" style="top: 50%; left: 50%;">
             <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";"><b>NAME SEARCH<b></p>
-
-            <p style= "text-align:center; width:40%; margin: 0 auto; font-size: 20px;">Search a database phonetically, quickly and, easily. Find results that sound the same but may be spelled differently.</p>
-            <br/>
-            <br/>
-            <p style= "text-align:center; width:100%; font-size: 20px;">Start by uploading your files.</p>
-            <br/>
         </div>
         <div class="row">
             <div id="mainBox" class="align-center">
@@ -55,10 +49,10 @@
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
             <p>Next</p>
         </label>
-        <label class="btn btn-primary" id="aboutbutton">
+        <!-- <label class="btn btn-primary" id="aboutbutton">
             <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
             <p>About</p>
-        </label>
+        </label> -->
     </div>
     <script>
         var allData = [];
@@ -98,8 +92,7 @@
                 }
             }
             $('#nextbutton').fadeIn(500);
-            var input = document.getElementsByTagName('input')[0];
-            input.value = null
+
         }
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
         function deleteFile(event) {
@@ -111,6 +104,8 @@
                     break
                 }
             }
+            var input = document.getElementsByTagName('input')[0];
+            input.value = null
             if (file_list.length == 0) {
                 $('#nextbutton').fadeOut(500);
             }
