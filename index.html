@@ -13,8 +13,15 @@
 
     <!-- <link rel="stylesheet" href="css/main.css"> -->
 
-
 </head>
+
+<style>
+    @font-face {
+        font-family: "AWConqueror";
+        src: url("../fonts/AWConquerorFreCarved-One.otf");
+    }
+</style>
+
 <body>
     <div class="container">
         <div class="row" id="topheader">
@@ -24,9 +31,9 @@
         </div>
 
         <div class="row" style="top: 50%; left: 50%;">
-            <p style="text-align:center;width:100%;font-size: 33px;"><b>NAME SEARCH<b></p>
+            <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";"><b>NAME SEARCH<b></p>
 
-            <p style= "text-align:center; width:40%; margin: 0 auto; font-size: 20px;">Search a database phonetically, quickly and, easily. Find results that sound the same but are spelled differently.</p>
+            <p style= "text-align:center; width:40%; margin: 0 auto; font-size: 20px;">Search a database phonetically, quickly and, easily. Find results that sound the same but may be spelled differently.</p>
             <br/>
             <br/>
             <p style= "text-align:center; width:100%; font-size: 20px;">Start by uploading your files.</p>
@@ -44,14 +51,23 @@
             <ul class="align-center" id="fileList">
             </ul>
         </div>
-        <label class="btn btn-primary" id="nextbutton">
+        <label class="btn btn-success" id="nextbutton">
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
             <p>Next</p>
+        </label>
+        <label class="btn btn-primary" id="aboutbutton">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <p>About</p>
         </label>
     </div>
     <script>
         var allData = [];
         var file_list = [];
+
+        $('#aboutbutton').click(function(){
+            window.location.href = "about.html";
+        });
+
         $('#nextbutton').hide();
         $('#nextbutton').click(function() {
             for (var i = 0; i < file_list.length; i++) {
@@ -76,8 +92,10 @@
             for (var i = 0; i < files.length; i++) {
                 file_list.push(files[i]);
                 var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
-                $('#fileList').append(text);
-                text.fadeIn(500);
+                if (!(text in fileList)){
+                    $('#fileList').append(text);
+                    text.fadeIn(500);
+                }
             }
             $('#nextbutton').fadeIn(500);
             var input = document.getElementsByTagName('input')[0];

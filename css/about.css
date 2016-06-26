@@ -1,0 +1,16 @@
+body{
+    background: radial-gradient(white, lightgrey);
+}
+
+p{
+    font-family: sans-serif;
+}
+
+#topheader{
+    margin-top: 3%;
+}
+
+#dwbimage {
+    width: 50%;
+    margin: 0 auto;
+}
