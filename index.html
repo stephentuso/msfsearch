@@ -13,9 +13,6 @@
 
     <!-- <link rel="stylesheet" href="css/main.css"> -->
 
-
-
-
 </head>
 
 <style>
@@ -34,7 +31,7 @@
         </div>
 
         <div class="row" style="top: 50%; left: 50%;">
-            <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";><b>NAME SEARCH<b></p>
+            <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";"><b>NAME SEARCH<b></p>
 
             <p style= "text-align:center; width:40%; margin: 0 auto; font-size: 20px;">Search a database phonetically, quickly and, easily. Find results that sound the same but may be spelled differently.</p>
             <br/>
@@ -54,14 +51,23 @@
             <ul class="align-center" id="fileList">
             </ul>
         </div>
-        <label class="btn btn-primary" id="nextbutton">
+        <label class="btn btn-success" id="nextbutton">
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
             <p>Next</p>
+        </label>
+        <label class="btn btn-primary" id="aboutbutton">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+            <p>About</p>
         </label>
     </div>
     <script>
         var allData = [];
         var file_list = [];
+
+        $('#aboutbutton').click(function(){
+            window.location.href = "about.html";
+        });
+
         $('#nextbutton').hide();
         $('#nextbutton').click(function() {
             for (var i = 0; i < file_list.length; i++) {
