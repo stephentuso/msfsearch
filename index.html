@@ -31,14 +31,15 @@
             <ul class="align-center" id="fileList">
             </ul>
         </div>
-        <label class="btn btn-primary" id="nextbutton" style="visibility: hidden;">
+        <label class="btn btn-primary" id="nextbutton">
             <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
             <p>Next</p>
         </label>
     </div>
     <script>
         var allData = [];
-        var file_list = []
+        var file_list = [];
+        $('#nextbutton').hide();
         function handleFileSelect(evt) {
             var files = evt.target.files; // FileList object
 
@@ -52,15 +53,13 @@
                         console.log(data);
                         allData = allData.concat(data);
 
-                        // Show the next button
-                        $('#nextbutton').css("visibility", "visible");
-
                         if (index == files.length - 1) {
                             doneProcessing();
                         }
                     });
                 })(i);
             }
+            $('#nextbutton').fadeIn(500);
         }
 
         function doneProcessing() {
@@ -78,6 +77,9 @@
                     file_list.splice(i, 1)
                     break
                 }
+            }
+            if (file_list.length == 0) {
+                $('#nextbutton').fadeOut(500);
             }
         }
     </script>
