@@ -3,7 +3,7 @@
 <head>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
-    <script type="text/javascript" src="js/fuse.js"></script>
+    <script type="text/javascript" src="js/fuse.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/simple-excel.js"></script>
     <link rel="stylesheet" href="css/main.css">
@@ -78,7 +78,12 @@
 
                 for (var j = 0; j < columnNames[key].length; j++) {
                     var row = columnNames[key][j];
-                    tbody.append('<tr><td>' + row[0].original + '</td></tr>');
+                    var disp = '<tr>'
+                    for (var k = 0; k < row.length; k++) {
+                        disp = disp + '<td>' + row[k].original + '</td>'
+                    }
+                    disp = disp + '</tr><br>'
+                    tbody.append(disp)
                 }
             }
 

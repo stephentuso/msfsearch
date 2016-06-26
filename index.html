@@ -4,7 +4,7 @@
 <head>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
-    <script type="text/javascript" src="js/fuse.js"></script>
+    <script type="text/javascript" src="js/fuse.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/simple-excel.js"></script>
     <link rel="stylesheet" href="css/style.css">
@@ -55,11 +55,9 @@
         $('#nextbutton').hide();
         $('#nextbutton').click(function() {
             for (var i = 0; i < file_list.length; i++) {
-                console.log(file_list[i].name);
                 (function(index) {
                     parseCsvFile(file_list[index], function(data) {
                         allData = allData.concat(data);
-                        console.log(allData.length);
                         if (index == file_list.length - 1) {
                             doneProcessing();
                         }
@@ -82,6 +80,8 @@
                 text.fadeIn(500);
             }
             $('#nextbutton').fadeIn(500);
+            var input = document.getElementsByTagName('input')[0];
+            input.value = null
         }
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
         function deleteFile(event) {
@@ -100,13 +100,3 @@
     </script>
 </body>
 </html>
-
-<!--
-
-  _o/
-    \
-    /\_,
-    \
-    '
-
--->

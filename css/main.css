@@ -128,3 +128,7 @@ button:focus {
     margin-left: 20px;
 
 }
+
+td {
+    min-width: 200px;
+}
