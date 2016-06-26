@@ -7,29 +7,59 @@
     <script type="text/javascript" src="js/fuse.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/simple-excel.js"></script>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- <link rel="stylesheet" href="css/main.css"> -->
 </head>
 <body>
-    <img src="dwb.jpg">
+    <div class="container">
+        <div class="row" id="topheader">
+            <div class="align-center">
+                <img src="dwb.jpg" id="dwbimage" class="img-responsive center-block logo">
+            </div>
+        </div>
+        <div class="row">
+            <div id="mainBox" class="align-center">
+                <label class="btn btn-danger center-block" id="filebutton">
+                    Select Files
+                    <input type="file" style="display: none;" id="files" value="Select File">
+                </label>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="align-center" id="fileList">
 
-    <div id="mainBox">
-        <label class="selectFile">
-            <input type="file" id="files" name="files[]" multiple required>
-            <span>Select File</span>
-        </label>
+            </ul>
+        </div>
     </div>
-    <ul id="fileList">
-    </ul>
-
     <script>
         var allData = [];
 
         function handleFileSelect(evt) {
             var files = evt.target.files; // FileList object
+            for (var i = 0; i < files.length; i++) {
+                (function(index) {
+                    parseCsvFile(files[index], function(data) {
+                        console.log(data);
+                        allData = allData.concat(data);
+                        var text = $("<li class='text-center'></li>").text(files[index].name)
+                        $('#fileList').append(text)
+                        if (index == files.length - 1) {
+                            doneProcessing();
+                        }
+                    });
+                })(i);
+            }
+        }
+
+        function doneProcessing() {
+            window.localStorage.setItem("allData", allData);
+            console.log("DONE");
             processFiles(files);
         }
 
-        document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        document.getElementById('files').addEventListener('click', handleFileSelect, false);
     </script>
 </body>
 </html>
