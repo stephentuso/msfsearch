@@ -14,33 +14,28 @@
     </div>
 
     <script>
-        var data = []
+        var allData = [];
         function handleFileSelect(evt) {
             var files = evt.target.files; // FileList object
 
-            // files is a FileList of File objects. List some properties.
-            var output = [];
-            var reader = new FileReader();
-            reader.onload = function(event){
-                console.log(event.target.result)
-            }
-            console.log(files[0])
-            for (var i=0; i<files.length; i++) {
-                var parser;
-
-                switch (files[i].type) {
-                    case "text/csv":
-                        parser = new SimpleExcel.Parser.CSV()
-                        break;
-                    default:
-                        break;
-                }
-                parser.loadFile(files[0], function(){
-                    data.push(parser.getSheet())
-                    console.log(data)
-                })
+            for (var i = 0; i < files.length; i++) {
+                (function(index) {
+                    parseCsvFile(files[index], function(data) {
+                        console.log(data);
+                        allData.concat(data);
+                        if (index == files.length - 1) {
+                            doneProcessing();
+                        }
+                    });
+                })(i);
             }
         }
+
+        function doneProcessing() {
+            window.localStorage.setItem("allData", allData);
+            console.log("DONE");
+        }
+
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script>
 </body>
