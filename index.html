@@ -38,20 +38,22 @@
     </div>
     <script>
         var allData = [];
+        var file_list = []
         function handleFileSelect(evt) {
             var files = evt.target.files; // FileList object
+            file_list = file_list.concat(files)
+
             for (var i = 0; i < files.length; i++) {
+                file_list.push(files[i])
+                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>"+ files[i].name + "</li>")
+                $('#fileList').append(text);
                 (function(index) {
                     parseCsvFile(files[index], function(data) {
                         console.log(data);
                         allData = allData.concat(data);
-                        var text = $("<li class='text-center'></li>").text(files[index].name)
-
-                        // Add File List
-                        $('#fileList').append(text)
 
                         // Show the next button
-                        $('#nextbutton').css("visibility", "visible")
+                        $('#nextbutton').css("visibility", "visible");
 
                         if (index == files.length - 1) {
                             doneProcessing();
@@ -68,6 +70,17 @@
         }
 
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
+        function deleteFile(event) {
+            console.log("remove clicked")
+            console.log(event.target)
+            var remove_name = $(event.target).parent().text()
+            $(event.target).parent().remove()
+            for (var i=0; i<file_list.length; i ++) {
+                if (file_list[i].name == remove_name) {
+                    file_list.splice(i, 1)
+                }
+            }
+        }
     </script>
 </body>
 </html>

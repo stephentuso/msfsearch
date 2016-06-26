@@ -1,3 +1,14 @@
+Array.prototype.move = function (old_index, new_index) {
+    if (new_index >= this.length) {
+        var k = new_index - this.length;
+        while ((k--) + 1) {
+            this.push(undefined);
+        }
+    }
+    this.splice(new_index, 0, this.splice(old_index, 1)[0]);
+    return this; // for testing purposes
+};
+
 function processFiles(files) {
     for (var i = 0; i < files.length; i++) {
         (function(index) {
@@ -13,7 +24,7 @@ function processFiles(files) {
 
 function doneProcessing() {
     console.log(allData);
-    window.localStorage.setItem("allData", allData);
+    window.localStorage.setItem("allData", JSON.stringify(allData));
     var data = queryDataPhonetic(allData, "jiga");
     console.log(data);
 }
@@ -22,12 +33,16 @@ function queryDataPhonetic(data, query_string) {
     query_string = convertToPhonetic(query_string);
     console.log(query_string);
     var query_results = [];
+    var matchedWords = {};
     for (var i=0; i<data.length; i++) {
+        var row = data[i];
         for (var j=0; j<data[i].length; j++) {
-            if (data[i][j]["phonetic"] == query_string) {
-                query_results.push(data[i]);
-                console.log(data[i][28]["original"]);
-                console.log(data[i][j].phonetic);
+            var cell = row[j];
+            var phonetic = cell.phonetic;
+            if (!matchedWords[cell.original] && phonetic && phonetic.indexOf(query_string) == 0) {
+                row.move(j, 0);
+                query_results.push(row);
+                matchedWords[cell.original] = true;
             }
         }
     }
@@ -50,12 +65,16 @@ function parseCsvFile(file, callback) {
             headers.push(cell.toString());
         }
 
-        for (var i = 0; i < sheet.length; i++) {
+        for (var i = 1; i < sheet.length; i++) {
            var row = sheet[i];
            var dataRow = [];
            for (var j = 0; j < row.length; j++) {
                var cell = row[j];
                var cellValue = cell.toString();
+               // Don't store empty cells
+               if (cellValue == null || cellValue == "") {
+                   continue;
+               }
                dataRow.push({
                    original: cellValue,
                    phonetic: convertToPhonetic(cellValue),
@@ -67,10 +86,6 @@ function parseCsvFile(file, callback) {
 
         callback(data);
     });
-}
-
-function fuzzySearch(array) {
-
 }
 
 // Fuzzy search
