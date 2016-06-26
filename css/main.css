@@ -64,7 +64,7 @@ button:focus {
 }
 
 .searchContainer {
-    margin-left: 20px;
+    margin-left: 8px;
 }
 
 .searchContainer input {
@@ -77,7 +77,7 @@ button:focus {
 
 #searchButton {
     font-size: 1.2em;
-    background: red;
+    background: #ee0000;
     border: none;
     border-radius: 2px;
     padding: 8px;
@@ -89,7 +89,7 @@ button:focus {
     background: white;
 }
 
-img {
+/*img {
     display: block;
     width: 60%;
     length: 60%;
@@ -97,7 +97,8 @@ img {
     margin-left: auto;
     margin-right: auto;
     position: fixed;
-}
+}*/
+
 #fileList {
     text-align: center;
     clear: both;
