@@ -29,9 +29,12 @@
         </div>
         <div class="row">
             <ul class="align-center" id="fileList">
-
             </ul>
         </div>
+        <label class="btn btn-primary" id="nextbutton" style="visibility: hidden;">
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <p>Next</p>
+        </label>
     </div>
     <script>
         var allData = [];
@@ -43,7 +46,13 @@
                         console.log(data);
                         allData = allData.concat(data);
                         var text = $("<li class='text-center'></li>").text(files[index].name)
+
+                        // Add File List
                         $('#fileList').append(text)
+
+                        // Show the next button
+                        $('#nextbutton').css("visibility", "visible")
+
                         if (index == files.length - 1) {
                             doneProcessing();
                         }
@@ -58,7 +67,7 @@
             processFiles(files);
         }
 
-        document.getElementById('files').addEventListener('click', handleFileSelect, false);
+        document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script>
 </body>
 </html>
