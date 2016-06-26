@@ -3,6 +3,7 @@
 <html>
 <head>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
+    <script type="text/javascript" src="js/fuse.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/simple-excel.js"></script>
     <link rel="stylesheet" href="css/main.css">
@@ -42,13 +43,14 @@
                     for (var i=0; i<data.length; i++) {
                         for (var j=0; j<data[i].length; j++) {
                             for (var k=0; k<data[i][j].length; k++) {
-                                console.log(data[i][j][k].value)
+                                //console.log(data[i][j][k].value)
                             }
                         }
                     }
                 })
             }
         }
+
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
     </script>
 </body>
