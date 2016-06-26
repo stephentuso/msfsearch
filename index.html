@@ -43,6 +43,7 @@
         function doneProcessing() {
             window.localStorage.setItem("allData", allData);
             console.log("DONE");
+            processFiles(files);
         }
 
         document.getElementById('files').addEventListener('change', handleFileSelect, false);
