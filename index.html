@@ -41,9 +41,10 @@
             file_list = file_list.concat(files)
 
             for (var i = 0; i < files.length; i++) {
-                file_list.push(files[i])
-                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>"+ files[i].name + "</li>")
+                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
+                console.log(file_list)
                 $('#fileList').append(text);
+                text.fadeIn(500);
                 (function(index) {
                     parseCsvFile(files[index], function(data) {
                         console.log(data);
@@ -67,7 +68,7 @@
             console.log("remove clicked")
             console.log(event.target)
             var remove_name = $(event.target).parent().text()
-            $(event.target).parent().remove()
+            $(event.target).parent().fadeOut(500)
             for (var i=0; i<file_list.length; i ++) {
                 if (file_list[i].name == remove_name) {
                     file_list.splice(i, 1)
