@@ -1,4 +1,4 @@
-Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,ID_0,ISO,NAME_0,ID_1,NAME_1,ID_2,Location,HASC_2,CCN_2,CCA_2,TYPE_2,ENGTYPE_2,NL_NAME_2,VARNAME_2,@id,admin_leve,boundary,Patient name,source,source_dat,type,@relations
+Name,descriptio,timestamp,begin,end,altitudeMo,tessellate,extrude,visibility,drawOrder,icon,ID_0,ISO,NAME_0,ID_1,NAME_1,ID_2,Location,HASC_2,CCN_2,CCA_2,TYPE_2,ENGTYPE_2,NL_NAME_2,VARNAME_2,@id,admin_leve,boundary,Area name,source,source_dat,type,@relations
 ,,,,,clampToGround,-1,-1,-1,,,163,NGA,Nigeria,22,Kebbi,449,Aleiro,,0,,Local Authority,Local Authority,,,relation/3708134,8,administrative,Sabiyal,ehealthafrica.org,2013,boundary,
 ,,,,,clampToGround,-1,-1,-1,,,163,NGA,Nigeria,22,Kebbi,449,Aleiro,,0,,Local Authority,Local Authority,,,relation/3708043,8,administrative,Gulmare,ehealthafrica.org,2013,boundary,
 ,,,,,clampToGround,-1,-1,-1,,,163,NGA,Nigeria,22,Kebbi,449,Aleiro,,0,,Local Authority,Local Authority,,,relation/3708077,8,administrative,Kashin Zama,ehealthafrica.org,2013,boundary,
