@@ -2,31 +2,53 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <script type="text/javascript" src="js/simple-excel.js"></script>
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-    <div class="uploadFile">
-    <label class="mainBox">
-        <input type="file" id="files" name="files[]" multiple required>
-        <span>Select File</span>
-    </label>
+    <img src="dwb.jpg">
+    
+    <div id="mainBox">
+        <label class="selectFile">
+            <input type="file" id="files" name="files[]" multiple required>
+            <span>Select File</span>
+        </label>
     </div>
+    <ul id="fileList">
+    </ul>
 
     <script>
+
         var data = []
         function handleFileSelect(evt) {
             var files = evt.target.files; // FileList object
 
             // files is a FileList of File objects. List some properties.
-            var output = [];
             var reader = new FileReader();
+
             reader.onload = function(event){
-                console.log(event.target.result)
+
+                // Do something when the file is loaded
+                console.log(event.target.result);
+
+                $('#mainBox').css('width', '100px');
+
+                for (var f in files){
+                    var x = document.getElementById("fileList");
+                    var option = document.createElement("li");
+                    option.text = "Kiwi";
+                    x.appendChild(option);
+
+                }
+
+                //document.getElementById("mainBox").style.color = blue;
             }
-            console.log(files[0])
+
+            reader.readAsText(files[0], "UTF-8")
+
             for (var i=0; i<files.length; i++) {
                 var parser;
 
@@ -38,13 +60,13 @@
                         break;
                 }
                 parser.loadFile(files[0], function(){
-                    data.push(parser.getSheet())
-                    console.log(data)
+                    data.push(parser.getSheet());
+                    //console.log(data)
 
                     for (var i=0; i<data.length; i++) {
                         for (var j=0; j<data[i].length; j++) {
                             for (var k=0; k<data[i][j].length; k++) {
-                                console.log(data[i][j][k].value)
+                                //console.log(data[i][j][k].value)
                             }
                         }
                     }
