@@ -1,0 +1,10 @@
+body{
+    background: radial-gradient(white, lightgrey);
+}
+
+#topheader{
+    margin-top: 3%;
+}
+#dwbimage {
+    width: 50%;
+}
