@@ -46,7 +46,7 @@
 
         function search(query) {
 
-            var data = JSON.parse(window.localStorage.getItem('allData'));
+            var data = readData();
 
             var tbody = $('#results');
             tbody.empty();
@@ -66,7 +66,7 @@
             var columnNames = {};
 
             for (var i = 0; i < results.length; i++) {
-                var column = results[i][0].columnName;
+                var column = results[i][0].c;
 
                 if (!columnNames[column]) {
                     columnNames[column] = [];
@@ -86,9 +86,9 @@
                     var disp = '<tr class="resultsRow">';
                     for (var k = 0; k < row.length; k++) {
                         if (k == 0) {
-                            disp = disp + '<th class="rowHeader" title="' + row[k].original + '">' + row[k].original + '</th>'
+                            disp = disp + '<th class="rowHeader" title="' + row[k].o + '">' + row[k].o + '</th>'
                         } else {
-                            disp = disp + '<td title="' + row[k].columnName + '">' + row[k].original + '</td>'
+                            disp = disp + '<td title="' + row[k].c + '">' + row[k].o + '</td>'
                         }
 
                     }

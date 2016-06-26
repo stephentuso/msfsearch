@@ -82,9 +82,7 @@
             }
         });
         function doneProcessing() {
-            var json = JSON.stringify(allData);
-            console.log(json.length);
-            window.localStorage.setItem("allData", json);
+            saveData(allData);
             window.location.href = "search.html";
         }
         function handleFileSelect(evt) {
