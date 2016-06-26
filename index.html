@@ -29,9 +29,12 @@
         </div>
         <div class="row">
             <ul class="align-center" id="fileList">
-
             </ul>
         </div>
+        <label class="btn btn-primary" id="nextbutton" style="visibility: hidden;">
+            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+            <p>Next</p>
+        </label>
     </div>
     <script>
         var allData = [];
@@ -49,6 +52,10 @@
                     parseCsvFile(files[index], function(data) {
                         console.log(data);
                         allData = allData.concat(data);
+
+                        // Show the next button
+                        $('#nextbutton').css("visibility", "visible");
+
                         if (index == files.length - 1) {
                             doneProcessing();
                         }
