@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
+    <script type="text/javascript" src="js/fuse.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <link rel="stylesheet" href="css/main.css"/>
+    <script type="text/javascript" src="js/simple-excel.js"></script>
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
     <div class="searchBar">
         <div class="searchContainer">
-            <input type="text" id="searchInput"/>
+            <input type="text" id="searchInput" placeholder="Search Phonetically"/>
+            <button id="searchButton">Search</button>
         </div>
     </div>
 
-    <table class="results">
-        <tbody class="results">
-
+    <table>
+        <tbody id="results">
         </tbody>
     </table>
+
+    <script type="text/javascript">
+
+        $('#searchButton').click(function() {
+            var input = document.getElementById('searchInput');
+            console.log(input.value);
+            search(input.value);
+        });
+
+        function search(query) {
+
+            var data = JSON.parse(window.localStorage.getItem('allData'));
+
+            var tbody = $('#results');
+            tbody.empty();
+
+            var results = queryDataPhonetic(data, query);
+
+            for (var i = 0; i < results.length; i++) {
+                var row = results[i];
+                tbody.append('<tr><td>' + row[0].columnName + ': ' + row[0].original + '</td></tr>');
+            }
+
+        }
+
+    </script>
 
 </body>
 </hmtl>
