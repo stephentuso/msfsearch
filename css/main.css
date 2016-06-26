@@ -1,9 +1,64 @@
+body{
+
+}
+
+label.mainBox input[type="file"] {
+    position: fixed;
+    top: -1000px;
+}
+
 .uploadFile{
-  width: 200px;
+  width: 600px;
   height: 100px;
-  border: 25px solid navy;
-  margin: 25px;
-  margin-left: auto;
-  margin-right: auto;
-  width: 6em
+
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -50px;
+  margin-left: -300px;
+
+  /*background: red; /* For browsers that do not support gradients */
+  background: linear-gradient(#ee0000, #cf0202); /* For Safari 5.1 to 6.0 */
+  border-radius: 5px;
+}
+
+.mainBox {
+    width: 600px;
+    height: 100px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -22px;
+    margin-left: -300px;
+    color: white;
+
+    font-family:sans-serif;
+    font-size: 40px;
+
+    text-align: center;
+
+    backface-visibility: hidden;
+
+    /*background: red; /* For browsers that do not support gradients */
+    /*background: linear-gradient(#ee0000, #cf0202); /* For Safari 5.1 to 6.0 */
+    /*border-radius: 5px;
+    */
+}
+
+/* hover, active, invalid + span, valid + span */
+.mainBox: hover{
+    background: #ee0000;
+}
+
+.mainBox: active{
+
+}
+
+.mainBox: invalid + span{
+
+}
+
+.mainBox: valid + span{
+
 }
