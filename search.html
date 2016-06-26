@@ -21,12 +21,10 @@
         </div>
     </div>
 
-    <div class="outer">
-        <div class="inner">
-            <table id="results">
-            </table>
-        </div>
-    </div>
+    <table id="resultsTable">
+        <tbody id="results">
+        </tbody>
+    </table>
 
     <script type="text/javascript">
 
@@ -41,20 +39,16 @@
                 $('#searchButton').click();
             //}
         });
-
-        $('#searchButton').click();
-
+        var data = JSON.parse(window.localStorage.getItem('allData'));
         function search(query) {
 
-            var data = JSON.parse(window.localStorage.getItem('allData'));
 
             var tbody = $('#results');
             tbody.empty();
-
             var results = queryDataPhonetic(data, query);
 
             if (query == "") {
-                tbody.append('<tr class="resultsHeader"><th><h3>Enter a search term.</h3></th></tr>');
+                tbody.append('<tr><td><h3>Enter a search term.</h3></td></tr>');
                 return;
             }
 
@@ -79,27 +73,31 @@
 
             for (var i = 0; i < keys.length; i++) {
                 var key = keys[i];
-                tbody.append('<tr class="resultsHeader"><th><h3>' + key + '</h3></th><td></td></tr>');
+                tbody.append('<tr><td><h3>' + key + '</h3></td></tr>');
 
                 for (var j = 0; j < columnNames[key].length; j++) {
                     var row = columnNames[key][j];
-                    var disp = '<tr class="resultsRow">';
+                    var disp = '<tr>'
                     for (var k = 0; k < row.length; k++) {
-                        if (k == 0) {
-                            disp = disp + '<th class="rowHeader" title="' + row[k].original + '">' + row[k].original + '</th>'
-                        } else {
-                            disp = disp + '<td title="' + row[k].columnName + '">' + row[k].original + '</td>'
-                        }
-
+                        disp = disp + '<td>' + row[k].original + '</td>'
                     }
-                    disp = disp + '</tr><br>';
+                    disp = disp + '</tr><br>'
                     tbody.append(disp)
                 }
             }
-
         }
-
+        var csvContent = "data:text/csv;charset=utf-8,";
+        for (var i=0; i<data.length; i++) {
+            for (var j=0; j<data[i].length; j++) {
+                csvContent += data[i][j].original + ","
+            }
+            csvContent += "\n"
+        }
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "my_data.csv");
+        link.click();
     </script>
-
 </body>
 </hmtl>
