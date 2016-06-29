@@ -1,8 +1,32 @@
-# MSFSearch
-##Made at Angelhack Silicon Valley 2016
+# electron-quick-start
 
-###About
-MSFSearch is an open source search application for the msf staff. The problem that they were facing was writing names of places was impossible to do accurately. The staff would write it phonetically, however is was not always accurate. One example is 'gym' vs. 'jim'. While phonectly the same they are written differently. A normal search tool would not be able to return results for jim and gym if the user searched for gym. The MSFSearch app allows users to search and find phonetically similar results in the MSF database.
+**Clone and run for a quick way to see an Electron in action.**
 
-###To Use
-Run the index.html file. Once you do that you can select your files to search. Once the files are selected you can hit the 'next' button to go the search screen. The searh bar is to use the search the terms to want to use. The results will appear below.
+This is a minimal Electron application based on the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start) within the Electron documentation.
+
+**Use this app along with the [Electron API Demos](http://electron.atom.io/#get-started) app for API code examples to help you get started.**
+
+A basic Electron application needs just these files:
+
+- `package.json` - Points to the app's main file and lists its details and dependencies.
+- `main.js` - Starts the app and creates a browser window to render HTML. This is the app's **main process**.
+- `index.html` - A web page to render. This is the app's **renderer process**.
+
+You can learn more about each of these components within the [Quick Start Guide](http://electron.atom.io/docs/latest/tutorial/quick-start).
+
+## To Use
+
+To clone and run this repository you'll need [Git](https://git-scm.com) and [Node.js](https://nodejs.org/en/download/) (which comes with [npm](http://npmjs.com)) installed on your computer. From your command line:
+
+```bash
+# Clone this repository
+git clone https://github.com/electron/electron-quick-start
+# Go into the repository
+cd electron-quick-start
+# Install dependencies and run the app
+npm install && npm start
+```
+
+Learn more about Electron and its API in the [documentation](http://electron.atom.io/docs/latest).
+
+#### License [CC0 (Public Domain)](LICENSE.md)

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script>jQuery.noConflict();</script>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
     <script type="text/javascript" src="js/fuse.min.js"></script>
@@ -32,19 +34,20 @@
 
     <script type="text/javascript">
 
-        $('#searchButton').click(function() {
+
+        jQuery('#searchButton').click(function() {
             var input = document.getElementById('searchInput');
             console.log(input.value);
             search(input.value);
         });
 
-        $('#searchInput').on('keyup', function(e) {
+        jQuery('#searchButton').click('searchInput').on('keyup', function(e) {
             //if (e.keyCode == 13) {
-                $('#searchButton').click();
+               jQuery('#searchButton').click();
             //}
         });
 
-        $('#searchButton').click();
+        jQuery('#searchButton').click();
 
         var data = readData();
 
@@ -52,7 +55,7 @@
 
             var data = readData();
 
-            var tbody = $('#results');
+            var tbody = jQuery('#results');
             tbody.empty();
 
             var results = queryDataPhonetic(data, query);

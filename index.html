@@ -1,8 +1,10 @@
-
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/double-metaphone/index.js"></script>
     <script type="text/javascript" src="js/fuse.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
@@ -10,111 +12,109 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="shortcut icon" href="icon.png" />
+  </head>
+  <style>
+      @font-face {
+          font-family: "AWConqueror";
+          src: url("../fonts/AWConquerorFreCarved-One.otf");
+      }
+  </style>
 
-    <!-- <link rel="stylesheet" href="css/main.css"> -->
+  <body>
+      <div class="container">
+          <div class="row" id="topheader">
+              <div class="align-center" style="margin-right:60px;">
+                  <img src="dwb.png" id="dwbimage" class="img-responsive center-block logo">
+              </div>
+          </div>
 
-</head>
+          <div class="row" style="top: 50%; left: 50%;">
+              <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";"><b>SOUND SEARCH<b></p>
+          </div>
+          <div class="row">
+              <div id="mainBox" class="align-center">
+                  <label class="btn btn-danger center-block" id="filebutton">
+                      Select Files
+                      <input type="file" style="display: none;" id="files" value="Select File" accept=".csv" multiple />
+                  </label>
+              </div>
+          </div>
+          <div class="row">
+              <ul class="align-center" id="fileList">
+              </ul>
+          </div>
+          <label class="btn btn-success" id="nextbutton">
+              <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
+              <p>Next</p>
+          </label>
+          <!-- <label class="btn btn-primary" id="aboutbutton">
+              <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+              <p>About</p>
+          </label> -->
+      </div>
+      <script>
+          var allData = [];
+          var file_list = [];
 
-<style>
-    @font-face {
-        font-family: "AWConqueror";
-        src: url("../fonts/AWConquerorFreCarved-One.otf");
-    }
-</style>
+        /*  $('#aboutbutton').click(function(){
+              window.location.href = "about.html";
+          });
+        */
 
-<body>
-    <div class="container">
-        <div class="row" id="topheader">
-            <div class="align-center" style="margin-right:60px;">
-                <img src="dwb.png" id="dwbimage" class="img-responsive center-block logo">
-            </div>
-        </div>
 
-        <div class="row" style="top: 50%; left: 50%;">
-            <p style="text-align:center;width:100%;font-size: 33px; font-face:"AWConqueror";"><b>SOUND SEARCH<b></p>
-        </div>
-        <div class="row">
-            <div id="mainBox" class="align-center">
-                <label class="btn btn-danger center-block" id="filebutton">
-                    Select Files
-                    <input type="file" style="display: none;" id="files" value="Select File" accept=".csv" multiple />
-                </label>
-            </div>
-        </div>
-        <div class="row">
-            <ul class="align-center" id="fileList">
-            </ul>
-        </div>
-        <label class="btn btn-success" id="nextbutton">
-            <span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>
-            <p>Next</p>
-        </label>
-        <!-- <label class="btn btn-primary" id="aboutbutton">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-            <p>About</p>
-        </label> -->
-    </div>
-    <script>
-        var allData = [];
-        var file_list = [];
+          $('#nextbutton').hide();
+          $('#nextbutton').click(function() {
 
-        $('#aboutbutton').click(function(){
-            window.location.href = "about.html";
-        });
+              var filesProcessed = 0;
 
-        $('#nextbutton').hide();
-        $('#nextbutton').click(function() {
+              for (var i = 0; i < file_list.length; i++) {
+                  (function(index) {
+                      parseCsvFile(file_list[index], function(data) {
+                          allData = allData.concat(data);
+                          console.log(allData.length);
+                          filesProcessed++;
+                          console.log(filesProcessed);
+                          if (filesProcessed == file_list.length) {
+                              doneProcessing();
+                          }
+                      });
+                  })(i);
+              }
+          });
 
-            var filesProcessed = 0;
+          function doneProcessing() {
+              saveData(allData);
+              window.location.href = "search.html";
+          }
+          function handleFileSelect(evt) {
+              var files = evt.target.files; // FileList object
+              for (var i = 0; i < files.length; i++) {
+                  file_list.push(files[i]);
+                  var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
+                  if (!(text in fileList)){
+                      $('#fileList').append(text);
+                      text.fadeIn(500);
+                  }
+              }
+              $('#nextbutton').fadeIn(500);
+              var input = document.getElementsByTagName('input')[0];
+              input.value = null
+          }
+          document.getElementById('files').addEventListener('change', handleFileSelect, false);
+          function deleteFile(event) {
+              var remove_name = $(event.target).parent().text().trim()
+              $(event.target).parent().fadeOut(500)
+              for (var i=0; i<file_list.length; i ++) {
+                  if (file_list[i].name == remove_name) {
+                      file_list.splice(i, 1)
+                      break
+                  }
+              }
 
-            for (var i = 0; i < file_list.length; i++) {
-                (function(index) {
-                    parseCsvFile(file_list[index], function(data) {
-                        allData = allData.concat(data);
-                        console.log(allData.length);
-                        filesProcessed++;
-                        console.log(filesProcessed);
-                        if (filesProcessed == file_list.length) {
-                            doneProcessing();
-                        }
-                    });
-                })(i);
-            }
-        });
-
-        function doneProcessing() {
-            saveData(allData);
-            window.location.href = "search.html";
-        }
-        function handleFileSelect(evt) {
-            var files = evt.target.files; // FileList object
-            for (var i = 0; i < files.length; i++) {
-                file_list.push(files[i]);
-                var text = $("<li class='text-center'><button class='glyphicon glyphicon-remove' onclick='deleteFile(event)'></button>&nbsp;"+ files[i].name + "</li>").hide()
-                if (!(text in fileList)){
-                    $('#fileList').append(text);
-                    text.fadeIn(500);
-                }
-            }
-            $('#nextbutton').fadeIn(500);
-            var input = document.getElementsByTagName('input')[0];
-            input.value = null
-        }
-        document.getElementById('files').addEventListener('change', handleFileSelect, false);
-        function deleteFile(event) {
-            var remove_name = $(event.target).parent().text().trim()
-            $(event.target).parent().fadeOut(500)
-            for (var i=0; i<file_list.length; i ++) {
-                if (file_list[i].name == remove_name) {
-                    file_list.splice(i, 1)
-                    break
-                }
-            }
-
-            if (file_list.length == 0) {
-                $('#nextbutton').fadeOut(500);
-            }
-        }
-    </script>
-</body>
+              if (file_list.length == 0) {
+                  $('#nextbutton').fadeOut(500);
+              }
+          }
+      </script>
+  </body>
 </html>
