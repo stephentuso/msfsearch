@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <title>MSF Search</title>
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script>jQuery.noConflict();</script>
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
@@ -35,6 +36,19 @@
     <script type="text/javascript">
 
 
+    jQuery('#searchButton').click(function() {
+        var input = document.getElementById('searchInput');
+        //console.log(input.value);
+        search(input.value);
+    });
+
+    jQuery('#searchInput').on('keyup', function(e) {
+        jQuery('#searchButton').click();
+    });
+
+    jQuery('#searchButton').click();
+
+    /*
         jQuery('#searchButton').click(function() {
             var input = document.getElementById('searchInput');
             console.log(input.value);
@@ -48,6 +62,7 @@
         });
 
         jQuery('#searchButton').click();
+        */
 
         var data = readData();
 
