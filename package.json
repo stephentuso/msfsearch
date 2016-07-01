@@ -1,27 +1,25 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "msfSearch",
+  "version": "2.0",
+  "description": "A minimal search application",
   "main": "main.js",
   "scripts": {
     "start": "electron ."
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/electron/electron-quick-start.git"
+    "url": "git+https://github.com/stephentuso/msfsearch.git"
   },
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial"
+    "Search"
   ],
-  "author": "GitHub",
+  "author": "Tuso",
   "license": "CC0-1.0",
   "bugs": {
-    "url": "https://github.com/electron/electron-quick-start/issues"
+    "url": "https://github.com/stephentuso/msfsearch/issues"
   },
-  "homepage": "https://github.com/electron/electron-quick-start#readme",
+  "homepage": "https://github.com/stephentuso/msfsearch#readme",
   "devDependencies": {
     "electron-prebuilt": "^1.2.0"
   }
